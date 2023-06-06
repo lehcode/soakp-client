@@ -1,5 +1,3 @@
-/* tslint:disable */
-/* eslint-disable */
 /**
  * OpenAI API
  * APIs for sampling from and fine-tuning language models
@@ -13,7 +11,8 @@
  */
 
 
-const packageJson = require("../package.json");
+import packageJson from './package.json';
+import FormData from 'form-data';
 
 export interface ConfigurationParameters {
     apiKey?: string | Promise<string> | ((name: string) => string) | ((name: string) => Promise<string>);
@@ -106,7 +105,7 @@ export class Configuration {
             this.baseOptions.headers['OpenAI-Organization'] = this.organization;
         }
         if (!this.formDataCtor) {
-            this.formDataCtor = require("form-data");
+            this.formDataCtor = FormData;
         }
     }
 
