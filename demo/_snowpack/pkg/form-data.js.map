@@ -1,0 +1,1 @@
+{"version":3,"file":"form-data.js","sources":["../../../node_modules/form-data/lib/browser.js"],"sourcesContent":["/* eslint-env browser */\nmodule.exports = typeof self == 'object' ? self.FormData : window.FormData;\n"],"names":[],"mappings":"AAAA;WACc,GAAG,OAAO,IAAI,IAAI,QAAQ,GAAG,IAAI,CAAC,QAAQ,GAAG,MAAM,CAAC;;;;"}

@@ -1,0 +1,6 @@
+{
+  "imports": {
+    "axios": "./axios.js",
+    "form-data": "./form-data.js"
+  }
+}
