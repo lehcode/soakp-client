@@ -24,7 +24,7 @@
   "include": [
     "src/**/*.ts"
   ],
-  "exclude": ["dist", "node_modules"],
+  "exclude": ["demo", "node_modules"],
   "watchOptions": {
     "watchFile": "useFsEvents",
     "watchDirectory": "useFsEvents",

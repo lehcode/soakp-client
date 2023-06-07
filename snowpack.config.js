@@ -5,10 +5,11 @@
 
 /** @type {import("snowpack").SnowpackUserConfig } */
 export default {
-  root: "./",
+  // root: "./demo",
   mount: {
-    public: { url: "/", static: true, resolve: true },
-    src: { url: '/js' },
+    "./public": { url: "/", resolve: true, static: true, dot: true },
+    // "./": { url: "/", resolve: true, static: true },
+    "./src": { url: "/" }
   },
   exclude: [
     "**/node_modules/**/*",
@@ -17,6 +18,7 @@ export default {
     "**/.github/**/*",
     "**/.gitignore",
     "**/.npmignore",
+    "**/.snowpack",
     "**/.openapi-generator-ignore",
     "**/.openapi-generator/**/*",
     "**/Dockerfile",
@@ -32,7 +34,7 @@ export default {
   ],
   plugins: ["@snowpack/plugin-typescript"],
   packageOptions: {
-    knownEntrypoints: ["axios", 'form-data'],
+    knownEntrypoints: ["form-data", "axios"]
   },
   devOptions: {
     secure: {
@@ -46,6 +48,5 @@ export default {
   },
   alias: {
     "soakp-client": "./src/soakp-client.ts",
-    // "../package.json": "./package.json"
   }
 };
