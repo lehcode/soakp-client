@@ -11,17 +11,6 @@
  */
 import FormData from 'form-data';
 
-let VERSION = '1.0.0';
-
-fetch('/package.json')
-.then(response => response.json())
-.then(data => {
-    VERSION = data.version;
-    console.log(data);
-});
-
-
-
 export interface ConfigurationParameters {
     apiKey?: string | Promise<string> | ((name: string) => string) | ((name: string) => Promise<string>);
     organization?: string;
@@ -31,6 +20,8 @@ export interface ConfigurationParameters {
     basePath?: string;
     baseOptions?: any;
     formDataCtor?: new () => any;
+    uaName?: string;
+    uaVersion?: string;
 }
 
 export class Configuration {
@@ -91,6 +82,10 @@ export class Configuration {
      */
     formDataCtor?: new () => any;
 
+    private uaVersion: string | undefined = '3.2.1';
+
+    private uaName: string | undefined = 'OpenAI';
+
     constructor(param: ConfigurationParameters = {}) {
         this.apiKey = param.apiKey;
         this.organization = param.organization;
@@ -100,12 +95,15 @@ export class Configuration {
         this.basePath = param.basePath;
         this.baseOptions = param.baseOptions;
         this.formDataCtor = param.formDataCtor;
+        this.uaName = param.uaName;
+        this.uaVersion = param.uaVersion;
 
         if (!this.baseOptions) {
             this.baseOptions = {};
         }
+
         this.baseOptions.headers = {
-            'User-Agent': `Soakp-Client/NodeJS/${VERSION}`,
+            'User-Agent': `${this.uaName}/NodeJS/${this.uaVersion}`,
             'Authorization': `Bearer ${this.apiKey}`,
             ...this.baseOptions.headers,
         }
@@ -114,7 +112,7 @@ export class Configuration {
         }
         if (!this.formDataCtor) {
             this.formDataCtor = FormData;
-        }
+        };
     }
 
     /**
@@ -131,4 +129,14 @@ export class Configuration {
         const jsonMime: RegExp = new RegExp('^(application\/json|[^;/ \t]+\/[^;/ \t]+[+]json)[ \t]*(;.*)?$', 'i');
         return mime !== null && (jsonMime.test(mime) || mime.toLowerCase() === 'application/json-patch+json');
     }
+
+    public set userAgent(data: { agent: string, version: string }) {
+        this.baseOptions.headers['User-Agent'] = `${data.agent}/NodeJS/${data.version}`;
+        this.uaVersion = data.version;
+        this.uaName = data.agent;
+    }
+
+    public get userAgent(): string {
+        return `${this.uaName}/NodeJS/${this.uaVersion}`;
+    };
 }
