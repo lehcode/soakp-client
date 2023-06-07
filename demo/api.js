@@ -1,4 +1,4 @@
-import globalAxios from "../_snowpack/pkg/axios.js";
+import globalAxios from "./_snowpack/pkg/axios.js";
 import {DUMMY_BASE_URL, assertParamExists, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction} from "./common.js";
 import {BASE_PATH, BaseAPI} from "./base.js";
 export const ChatCompletionRequestMessageRoleEnum = {

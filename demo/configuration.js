@@ -1,5 +1,5 @@
-import packageJson from "package.json";
-import FormData from "../_snowpack/pkg/form-data.js";
+import packageJson from "../package.json";
+import FormData from "./_snowpack/pkg/form-data.js";
 export class Configuration {
   constructor(param = {}) {
     this.apiKey = param.apiKey;

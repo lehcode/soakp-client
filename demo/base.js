@@ -1,4 +1,4 @@
-import globalAxios from "../_snowpack/pkg/axios.js";
+import globalAxios from "./_snowpack/pkg/axios.js";
 export const BASE_PATH = "https://api.openai.com/v1".replace(/\/+$/, "");
 export const COLLECTION_FORMATS = {
   csv: ",",
