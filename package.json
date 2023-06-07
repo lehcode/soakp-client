@@ -15,8 +15,7 @@
   ],
   "author": "Lehcode",
   "license": "MIT",
-  "main": "./dist/js/soakp-client.js",
-  "types": "./demo/js/soakp-client.d.ts",
+  "main": "./demo/js/soakp-client.js",
   "scripts": {
     "dev": "SNOWPACK_PUBLIC_CERT=$(cat ./snowpack.crt) SNOWPACK_PUBLIC_KEY=$(cat ./snowpack.key) npx snowpack dev --verbose",
     "build": "npx snowpack build --verbose",
