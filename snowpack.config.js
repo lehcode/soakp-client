@@ -32,7 +32,6 @@ export default {
   packageOptions: {
     knownEntrypoints: ["form-data", "axios"],
     source: "remote",
-    // external: ["fs", "form-data", "axios"]
 
   },
   devOptions: {
