@@ -25,11 +25,6 @@ Take your web interfaces to new heights with `SoakpClient` - the browser-focused
 Included lightweight `snowpack` builder is included to allow fast testing and build with predefined configuration. Update JWT in `public/index.html` code (`const token="..."`) with a real one obtained from SOAKP server. JWT is used instead of your public key in SOAKP client library. 
 Please refer to [SOAKP server documentation](https://lehcode.github.io/soakp/docs/) for more information.
 
-`public/js/main.js`:
-```javascript
-import { SoakpClient } from '../../src/soakp-client';
-```
-
 `public/index.html`:
 ```html
 <script type="module">
