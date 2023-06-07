@@ -58,7 +58,7 @@ export class SoakpClient {
         apiKey: this.token,
         basePath: this.apiBase,
         uaName: 'SOAKP-Client',
-        uaVersion: JSON.parse(fs.readFileSync('../package.json', 'utf8')).version
+        uaVersion: '1.0.1'
       }),
       this.apiBase
     );
