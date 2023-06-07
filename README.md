@@ -19,3 +19,40 @@ Key Features:
 To get started, simply instantiate the `SoakpClient` class with the necessary JWT, model, API base URL, and optional Axios configuration. From there, use the intuitive `makeRequest` method to seamlessly interact with the OpenAI API, generating text completions or facilitating chat-based conversations. Enjoy streamlined API communication and unleash the full potential of your UI applications.
 
 Take your web interfaces to new heights with `SoakpClient` - the browser-focused OpenAI library for UI developers. Embrace the power of natural language processing, delight your users, and create memorable user experiences with ease. Get started today and revolutionize your UI development workflow!
+
+## Usage
+
+Included lightweight `snowpack` builder is included to allow fast testing and build with predefined configuration. Update JWT in `public/index.html` code (`const token="..."`) with a real one obtained from SOAKP server. JWT is used instead of your public key in SOAKP client library. 
+Please refer to [SOAKP server documentation](https://lehcode.github.io/soakp/docs/) for more information.
+
+`public/js/main.js`:
+```javascript
+import { SoakpClient } from '../../src/soakp-client';
+```
+
+`public/index.html`:
+```html
+<script type="module">
+    import { SoakpClient } from "soakp-client";
+
+    console.log(SoakpClient);
+
+    const token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiJzay1IV0dvc0diYWltcmlYZDJFc2xXd1QzQmxia0ZKRnNnV2hsbFMzUGl3TWx0Nk9hbTEiLCJpYXQiOjE2ODU4OTY1MTgsImV4cCI6MTY4NTk4MjkxOH0.IsTHj0_OO7_TiLG8YEL1p2bgJQRijiA3wfVYEa6d6Aw";
+    const client = new SoakpClient(token, 'text-davinci-003',  'https://localhost:3033/openai', {rejectUnauthorized: false});
+
+    console.log(client);
+
+    client.makeRequest("completions", ["Say hi!"]).then((response) => {
+      debugger;
+      console.log(response);
+
+      if (response.status === 200) {
+        document.getElementsByClassName('response textarea')[0].value = JSON.stringify(response.data.data.response);
+        debugger;
+      }
+    }, (error, ...args) => {
+      debugger;
+    });
+  </script>
+```
