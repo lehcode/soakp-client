@@ -1,0 +1,18 @@
+/*
+ * [Package Error] "fs@v0.0.1-security" could not be built. 
+ *
+ *   [1/5] Verifying package is valid…
+ *   [2/5] Installing dependencies from npm…
+ *   [3/5] Building package using esinstall…
+ *   Running esinstall...
+ *   Cannot find module 'fs/index.js'
+ *
+ * How to fix:
+ *   - If you believe this to be an error in Skypack, file an issue here: https://github.com/skypackjs/skypack-cdn/issues
+ *   - If you believe this to be an issue in the package, share this URL with the package authors to help them debug & fix.
+ *   - Use https://skypack.dev/ to find a web-friendly alternative to find another package.
+ */
+
+console.warn("[Package Error] \"fs@v0.0.1-security\" could not be built. \n[1/5] Verifying package is valid…\n[2/5] Installing dependencies from npm…\n[3/5] Building package using esinstall…\nRunning esinstall...\nCannot find module 'fs/index.js'");
+throw new Error("[Package Error] \"fs@v0.0.1-security\" could not be built. ");
+export default null;
