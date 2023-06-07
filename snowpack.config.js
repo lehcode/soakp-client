@@ -1,15 +1,9 @@
-// Example: snowpack.config.mjs
-// The added "@type" comment will enable TypeScript type information via VSCode, etc.
-// import fs from "fs";
-//
-
 /** @type {import("snowpack").SnowpackUserConfig } */
 export default {
   // root: "./demo",
   mount: {
-    "./public": { url: "/", resolve: true, static: true, dot: true },
-    // "./": { url: "/", resolve: true, static: true },
-    "./src": { url: "/" }
+    "./public": { url: "/", resolve: true, static: true, dot: false },
+    "./src": { url: "/js" },
   },
   exclude: [
     "**/node_modules/**/*",
@@ -32,9 +26,14 @@ export default {
     "**/src/**/*",
     "**/tsconfig.json"
   ],
-  plugins: ["@snowpack/plugin-typescript"],
+  plugins: [
+    "@snowpack/plugin-typescript",
+  ],
   packageOptions: {
-    knownEntrypoints: ["form-data", "axios"]
+    knownEntrypoints: ["form-data", "axios"],
+    source: "remote",
+    // external: ["fs", "form-data", "axios"]
+
   },
   devOptions: {
     secure: {
