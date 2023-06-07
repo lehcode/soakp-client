@@ -22,7 +22,7 @@
     "resolveJsonModule": true
   },
   "include": [
-    "*.ts"
+    "src/**/*.ts"
   ],
   "exclude": ["dist", "node_modules"],
   "watchOptions": {
