@@ -8,6 +8,7 @@ import { OpenAIApi,
   CreateCompletionRequest,
   CreateChatCompletionRequest,
   CreateEditRequest } from './api';
+import fs from 'fs';
 
 /**
  *
@@ -55,7 +56,9 @@ export class SoakpClient {
     this.api = new OpenAIApi(
       new Configuration({
         apiKey: this.token,
-        basePath: this.apiBase
+        basePath: this.apiBase,
+        uaName: 'SOAKP-Client',
+        uaVersion: JSON.parse(fs.readFileSync('../package.json', 'utf8')).version
       }),
       this.apiBase
     );
