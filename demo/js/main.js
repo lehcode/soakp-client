@@ -1,1 +1,1 @@
-import { SoakpClient } from '../soakp-client.js';
+import { SoakpClient } from './soakp-client.js';

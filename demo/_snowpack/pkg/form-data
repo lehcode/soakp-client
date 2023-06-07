@@ -1,0 +1,16 @@
+/*
+ * Skypack CDN - form-data@4.0.0
+ *
+ * Learn more:
+ *   📙 Package Documentation: https://www.skypack.dev/view/form-data
+ *   📘 Skypack Documentation: https://www.skypack.dev/docs
+ *
+ * Pinned URL: (Optimized for Production)
+ *   ▶️ Normal: https://cdn.skypack.dev/pin/form-data@v4.0.0-jtCpCmyQPfg31uIBEq5z/mode=imports/optimized/form-data.js
+ *   ⏩ Minified: https://cdn.skypack.dev/pin/form-data@v4.0.0-jtCpCmyQPfg31uIBEq5z/mode=imports,min/optimized/form-data.js
+ *
+ */
+
+// Browser-Optimized Imports (Don't directly import the URLs below in your application!)
+export * from '/_snowpack/pkg/-/form-data@v4.0.0-jtCpCmyQPfg31uIBEq5z/dist=es2019,mode=imports/optimized/form-data.js';
+export {default} from '/_snowpack/pkg/-/form-data@v4.0.0-jtCpCmyQPfg31uIBEq5z/dist=es2019,mode=imports/optimized/form-data.js';

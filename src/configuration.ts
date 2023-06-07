@@ -9,10 +9,18 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
-
-import packageJson from '../package.json';
 import FormData from 'form-data';
+
+let VERSION = '1.0.0';
+
+fetch('/package.json')
+.then(response => response.json())
+.then(data => {
+    VERSION = data.version;
+    console.log(data);
+});
+
+
 
 export interface ConfigurationParameters {
     apiKey?: string | Promise<string> | ((name: string) => string) | ((name: string) => Promise<string>);
@@ -97,7 +105,7 @@ export class Configuration {
             this.baseOptions = {};
         }
         this.baseOptions.headers = {
-            'User-Agent': `Soakp-Client/NodeJS/${packageJson.version}`,
+            'User-Agent': `Soakp-Client/NodeJS/${VERSION}`,
             'Authorization': `Bearer ${this.apiKey}`,
             ...this.baseOptions.headers,
         }
