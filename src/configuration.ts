@@ -11,7 +11,7 @@
  */
 
 
-import packageJson from './package.json';
+import packageJson from '../package.json';
 import FormData from 'form-data';
 
 export interface ConfigurationParameters {
@@ -97,7 +97,7 @@ export class Configuration {
             this.baseOptions = {};
         }
         this.baseOptions.headers = {
-            'User-Agent': `OpenAI/NodeJS/${packageJson.version}`,
+            'User-Agent': `Soakp-Client/NodeJS/${packageJson.version}`,
             'Authorization': `Bearer ${this.apiKey}`,
             ...this.baseOptions.headers,
         }
