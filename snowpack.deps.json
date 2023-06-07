@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "axios": "^1.4.0",
+    "form-data": "^4.0.0",
+    "fs": "^0.0.1-security"
+  },
+  "lock": {
+    "axios#^1.4.0": "axios@v1.4.0-JWwnj44vnwe6DLEesOgc",
+    "form-data#^4.0.0": "form-data@v4.0.0-jtCpCmyQPfg31uIBEq5z"
+  }
+}

@@ -1,17 +1,36 @@
 {
   "compilerOptions": {
-    "declaration": true,
-    "target": "es6",
-    "module": "commonjs",
-    "noImplicitAny": true,
+    "target": "es2018",
+    "module": "esnext",
+    "strict": true,
     "outDir": "dist",
-    "rootDir": ".",
+    "rootDir": "./",
+    "noImplicitAny": true,
     "typeRoots": [
       "node_modules/@types"
-    ]
+    ],
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "inlineSourceMap": true,
+    "noEmitOnError": false,
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable"
+    ],
+    "moduleResolution": "node",
+    "resolveJsonModule": true
   },
-  "exclude": [
-    "dist",
-    "node_modules"
-  ]
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": ["demo/**/*", "node_modules/**/*", "public/**/*"],
+  "watchOptions": {
+    "watchFile": "useFsEvents",
+    "watchDirectory": "useFsEvents",
+    "fallbackPolling": "dynamicPriority",
+    "synchronousWatchDirectory": true,
+    "excludeDirectories": ["**/node_modules", "dist/**"],
+    "excludeFiles": ["**/*.js", "**/*.d.ts"]
+  }
 }

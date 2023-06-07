@@ -1,89 +1,53 @@
-# OpenAI Node.js Library
+# SOAKP Client
 
-The OpenAI Node.js library provides convenient access to the OpenAI API from Node.js applications. Most of the code in this library is generated from our [OpenAPI specification](https://github.com/openai/openai-openapi).
+Introducing `SoakpClient`: A Browser-focused OpenAI Library for Seamless UI Integration
 
-**Important note: this library is meant for server-side usage only, as using it in client-side browser code will expose your secret API key. [See here](https://platform.openai.com/docs/api-reference/authentication) for more details.**
+Are you a UI developer looking to enhance your web-based projects with powerful natural language processing capabilities? Look no further! `SoakpClient` is a TypeScript library specifically designed to overcome the limitations of using the original `openai` library in browser environments.
 
-## Installation
+With `SoakpClient`, you can effortlessly integrate the OpenAI API into your user interfaces, providing engaging and interactive experiences for your users. By leveraging a local [SOAKP server](https://github.com/lehcode/soakp) at `https://localhost:3033/openai/<completions>`, this library ensures secure communication with the OpenAI API, all while complying with browser security restrictions and OpenAI security guidelines. The SOAKP client library is a pure wrapper of forked `openai` library.
 
-```bash
-npm install openai
-```
+Key Features:
+- Seamlessly integrate the OpenAI API into browser applications.
+- Overcome limitations of using the original `openai` library in browsers.
+- Use custom generated JWT hardened by keyphrase for authentication, thus making OpenAI key to not being exposed or leave local environment.
+- Empowers UI developers to focus on building intuitive and engaging interfaces.
+- Enables the generation of text completions and chat-based interactions for UI applications.
+- Optimized for creating exceptional user experiences.
+
+`SoakpClient` is made for UI developers who want to use the power of the OpenAI API in their web-based projects. Whether you're building chatbots, text generation tools, or interactive applications requiring natural language processing, this library provides an interface for making API requests, allowing you to focus on delivering remarkable UI interactions.
+
+To get started, simply instantiate the `SoakpClient` class with the necessary JWT, model, API base URL, and optional Axios configuration. From there, use the intuitive `makeRequest` method to seamlessly interact with the OpenAI API, generating text completions or facilitating chat-based conversations. Enjoy streamlined API communication and unleash the full potential of your UI applications.
+
+Take your web interfaces to new heights with `SoakpClient` - the browser-focused OpenAI library for UI developers. Embrace the power of natural language processing, delight your users, and create memorable user experiences with ease. Get started today and revolutionize your UI development workflow!
 
 ## Usage
 
-The library needs to be configured with your account's secret key, which is available on the [website](https://platform.openai.com/account/api-keys). We recommend setting it as an environment variable. Here's an example of initializing the library with the API key loaded from an environment variable and creating a completion:
+Included lightweight `snowpack` builder is included to allow fast testing and build with predefined configuration. Update JWT in `public/index.html` code (`const token="..."`) with a real one obtained from SOAKP server. JWT is used instead of your public key in SOAKP client library. 
+Please refer to [SOAKP server documentation](https://lehcode.github.io/soakp/docs/) for more information.
 
-```javascript
-const { Configuration, OpenAIApi } = require("openai");
+`public/index.html`:
+```html
+<script type="module">
+    import { SoakpClient } from "soakp-client";
 
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-const openai = new OpenAIApi(configuration);
+    console.log(SoakpClient);
 
-const completion = await openai.createCompletion({
-  model: "text-davinci-003",
-  prompt: "Hello world",
-});
-console.log(completion.data.choices[0].text);
+    const token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiJzay1IV0dvc0diYWltcmlYZDJFc2xXd1QzQmxia0ZKRnNnV2hsbFMzUGl3TWx0Nk9hbTEiLCJpYXQiOjE2ODU4OTY1MTgsImV4cCI6MTY4NTk4MjkxOH0.IsTHj0_OO7_TiLG8YEL1p2bgJQRijiA3wfVYEa6d6Aw";
+    const client = new SoakpClient(token, 'text-davinci-003',  'https://localhost:3033/openai', {rejectUnauthorized: false});
+
+    console.log(client);
+
+    client.makeRequest("completions", ["Say hi!"]).then((response) => {
+      debugger;
+      console.log(response);
+
+      if (response.status === 200) {
+        document.getElementsByClassName('response textarea')[0].value = JSON.stringify(response.data.data.response);
+        debugger;
+      }
+    }, (error, ...args) => {
+      debugger;
+    });
+  </script>
 ```
-
-Check out the [full API documentation](https://platform.openai.com/docs/api-reference?lang=node.js) for examples of all the available functions.
-
-### Request options
-
-All of the available API request functions additionally contain an optional final parameter where you can pass custom [axios request options](https://axios-http.com/docs/req_config), for example:
-
-```javascript
-const completion = await openai.createCompletion(
-  {
-    model: "text-davinci-003",
-    prompt: "Hello world",
-  },
-  {
-    timeout: 1000,
-    headers: {
-      "Example-Header": "example",
-    },
-  }
-);
-```
-
-### Error handling
-
-API requests can potentially return errors due to invalid inputs or other issues. These errors can be handled with a `try...catch` statement, and the error details can be found in either `error.response` or `error.message`:
-
-```javascript
-try {
-  const completion = await openai.createCompletion({
-    model: "text-davinci-003",
-    prompt: "Hello world",
-  });
-  console.log(completion.data.choices[0].text);
-} catch (error) {
-  if (error.response) {
-    console.log(error.response.status);
-    console.log(error.response.data);
-  } else {
-    console.log(error.message);
-  }
-}
-```
-
-### Streaming completions
-
-Streaming completions (`stream=true`) are not natively supported in this package yet, but [a workaround exists](https://github.com/openai/openai-node/issues/18#issuecomment-1369996933) if needed.
-
-## Upgrade guide
-
-All breaking changes for major version releases are listed below.
-
-### 3.0.0
-
-- The function signature of `createCompletion(engineId, params)` changed to `createCompletion(params)`. The value previously passed in as the `engineId` argument should now be passed in as `model` in the params object (e.g. `createCompletion({ model: "text-davinci-003", ... })`)
-- Replace any `createCompletionFromModel(params)` calls with `createCompletion(params)`
-
-## Thanks
-
-Thank you to [ceifa](https://github.com/ceifa) for creating and maintaining the original unofficial `openai` npm package before we released this official library! ceifa's original package has been renamed to [gpt-x](https://www.npmjs.com/package/gpt-x).

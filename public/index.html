@@ -1,0 +1,50 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <textarea class="textarea response" cols="140" rows="15" wrap="soft"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+  <script type="module">
+    import { SoakpClient } from "soakp-client";
+
+    console.log(SoakpClient);
+
+    const token =
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiJzay1IV0dvc0diYWltcmlYZDJFc2xXd1QzQmxia0ZKRnNnV2hsbFMzUGl3TWx0Nk9hbTEiLCJpYXQiOjE2ODYwNTE5ODgsImV4cCI6MTY4NjEzODM4OH0.pG5KNG2sfk30tacgtnx9VGK-kICOn_KZJOc8m0LIGrM";
+    const client = new SoakpClient(token, 'text-davinci-003',  'https://localhost:3033/openai', {rejectUnauthorized: false});
+
+    console.log(client);
+
+    client.makeRequest("completions", ["Say hi!"]).then((response) => {
+      console.log(response);
+
+      if (response.status === 200) {
+        document.getElementsByClassName('response textarea')[0].value = JSON.stringify(response.data.data.response);
+      }
+    }, (error) => {
+      console.error(error);
+    });
+  </script>
+
+  <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+  <script>
+    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+    ga('create', 'UA-XXXXX-Y', 'auto'); ga('set', 'anonymizeIp', true); ga('set', 'transport', 'beacon'); ga('send', 'pageview')
+  </script>
+  <script src="https://www.google-analytics.com/analytics.js" async></script>
+</body>
+
+</html>
