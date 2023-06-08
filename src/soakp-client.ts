@@ -8,7 +8,6 @@ import { OpenAIApi,
   CreateCompletionRequest,
   CreateChatCompletionRequest,
   CreateEditRequest } from './api';
-import fs from 'fs';
 
 /**
  *
@@ -19,7 +18,7 @@ import fs from 'fs';
  * - Process response from OpenAI API forwarded from SOAKP server
  */
 
-export class SoakpClient {
+export default class SoakpClient {
   private readonly apiBase: string | undefined;
   private readonly api: OpenAIApi;
   private readonly axiosConfig: AxiosRequestConfig;
