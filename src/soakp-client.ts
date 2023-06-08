@@ -8,7 +8,6 @@ import { OpenAIApi,
   CreateCompletionRequest,
   CreateChatCompletionRequest,
   CreateEditRequest } from './api';
-import fs from 'fs';
 
 /**
  *
@@ -19,7 +18,7 @@ import fs from 'fs';
  * - Process response from OpenAI API forwarded from SOAKP server
  */
 
-export class SoakpClient {
+export default class SoakpClient {
   private readonly apiBase: string | undefined;
   private readonly api: OpenAIApi;
   private readonly axiosConfig: AxiosRequestConfig;
@@ -35,10 +34,10 @@ export class SoakpClient {
    * @param {AxiosRequestConfig}  axiosConfig
    */
   constructor(
-    jwt: string,
-    model: string,
-    apiBase: string,
-    axiosConfig: AxiosRequestConfig = {}
+      jwt: string,
+      model: string,
+      apiBase: string,
+      axiosConfig: AxiosRequestConfig = {}
   ) {
     this.token = '';
     if (this.assertParam('constructor', 'jwt', jwt)) {
@@ -72,9 +71,9 @@ export class SoakpClient {
    * @param {string} paramValue
    */
   private assertParam = function (
-    functionName: string,
-    paramName: string,
-    paramValue: unknown
+      functionName: string,
+      paramName: string,
+      paramValue: unknown
   ) {
     if (paramValue === null || paramValue === undefined) {
       console.error(
@@ -96,6 +95,7 @@ export class SoakpClient {
 
     switch (endpoint) {
       case 'completion':
+      case '/completion':
       case 'completions':
       case '/completions':
         return await this.api.createCompletion.call(
@@ -103,15 +103,17 @@ export class SoakpClient {
           request as CreateCompletionRequest,
           this.axiosConfig
         );
+      case 'chat/completion':
+      case '/chat/completion':
       case 'chat/completions':
       case '/chat/completions':
-      case 'chat-completions':
         return await this.api.createChatCompletion.call(
           this.api,
           request as CreateChatCompletionRequest,
           this.axiosConfig
         );
       case 'edits':
+      case '/edits':
         return await this.api.createEdit.call(
           this.api,
           request as CreateEditRequest,
