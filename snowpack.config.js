@@ -24,7 +24,8 @@ export default {
     "**/demo/**/*",
     "**/docs/**/*",
     "**/src/**/*",
-    "**/tsconfig.json"
+    "**/tsconfig.json",
+    "**/__tests__/**/*",
   ],
   plugins: [
     "@snowpack/plugin-typescript",
