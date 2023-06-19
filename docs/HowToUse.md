@@ -1,14 +1,19 @@
 # Usage 
 
-## Development
+First you need SOAKP server which manages JWTs used to authenticate your application. 
 
-Use `npm run dev` to start a dev server.
+## SOAKP server
 
-## Docker image
+### Docker image
 
-Use image 
+Use image at https://hub.docker.com/repository/docker/lehcode/soakp to generate a container.
 
-## Build
+### Build Manually
 
-1. Use `npm run build` to build the demo directory code.
-2. Then `docker run --name soakp-demo -p 443:443 -v $(pwd)/html:/usr/share/nginx/html:ro -d my-nginx`
+1. Checkout repository `git clone https://github.com/lehcode/soakp.git`
+2. Copy `.env.dist` to `.env`
+3. Run `docker compose up`
+
+## Obtain JSON Web Token (JWT)
+
+Instantiate the SOAKP-client class with the necessary JWT, model, API base URL, and optional Axios configuration. From there, use the intuitive SOAKP-client method to seamlessly interact with the OpenAI API, generating text completions or facilitating chat-based conversations. Enjoy streamlined API communication and unleash the full potential of your UI applications.
